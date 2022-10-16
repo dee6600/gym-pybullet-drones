@@ -35,15 +35,15 @@ from gym_pybullet_drones.utils.Logger import Logger
 from gym_pybullet_drones.utils.utils import sync, str2bool
 
 DEFAULT_DRONES = DroneModel("cf2x")
-DEFAULT_NUM_DRONES = 3
+DEFAULT_NUM_DRONES = 1
 DEFAULT_PHYSICS = Physics("pyb")
 DEFAULT_VISION = False
 DEFAULT_GUI = True
 DEFAULT_RECORD_VISION = False
 DEFAULT_PLOT = True
-DEFAULT_USER_DEBUG_GUI = False
+DEFAULT_USER_DEBUG_GUI = True
 DEFAULT_AGGREGATE = True
-DEFAULT_OBSTACLES = True
+DEFAULT_OBSTACLES = False
 DEFAULT_SIMULATION_FREQ_HZ = 240
 DEFAULT_CONTROL_FREQ_HZ = 48
 DEFAULT_DURATION_SEC = 12
@@ -79,8 +79,22 @@ def run(
     PERIOD = 10
     NUM_WP = control_freq_hz*PERIOD
     TARGET_POS = np.zeros((NUM_WP,3))
+    
+    # for i in range(NUM_WP):
+    #     TARGET_POS[i, :] = INIT_XYZS[0, 0], -1 + INIT_XYZS[0, 1], 0
+
+    # # #Trajectory for square path
     for i in range(NUM_WP):
-        TARGET_POS[i, :] = R*np.cos((i/NUM_WP)*(2*np.pi)+np.pi/2)+INIT_XYZS[0, 0], R*np.sin((i/NUM_WP)*(2*np.pi)+np.pi/2)-R+INIT_XYZS[0, 1], 0
+        if i < NUM_WP/4:
+            TARGET_POS[i, :] = INIT_XYZS[0, 0], -1 + INIT_XYZS[0, 1], 0
+        elif i < NUM_WP/2:
+            TARGET_POS[i, :] = -1 + INIT_XYZS[0, 0], -1 + INIT_XYZS[0, 1], 0
+        elif i < 3*NUM_WP/4:
+            TARGET_POS[i, :] = -1 + INIT_XYZS[0, 0], INIT_XYZS[0, 1], 0
+        else:
+            TARGET_POS[i, :] = INIT_XYZS[0, 0], INIT_XYZS[0, 1], 0
+
+ 
     wp_counters = np.array([int((i*NUM_WP/6)%NUM_WP) for i in range(num_drones)])
 
     #### Debug trajectory ######################################
