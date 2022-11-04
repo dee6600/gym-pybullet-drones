@@ -51,7 +51,7 @@ def run(rllib=DEFAULT_RLLIB,output_folder=DEFAULT_OUTPUT_FOLDER, gui=DEFAULT_GUI
               skip_render_check=True
               )
 
-    model = PPO.load("/Users/dee/Documents/projects/RLMultiRoter/gym-pybullet-drones/experiments/learning/results/save-hover-ppo-kin-one_d_rpm-10.15.2022_13.48.33/best_model")
+    model = PPO.load("/Users/dee/Documents/projects/RLMultiRoter/gym-pybullet-drones/experiments/learning/results-topint/save-topoint-ppo-kin-rpm-11.01.2022_21.28.03/best_model")
 
 
     #### Train the model #######################################

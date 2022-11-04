@@ -1,5 +1,13 @@
 from gym.envs.registration import register
 
+## mine register
+register(
+    id='topoint-aviary-v0',
+    entry_point='gym_pybullet_drones.envs.single_agent_rl.ToPointAviary:ToPointAviary',
+)
+
+
+
 register(
     id='ctrl-aviary-v0',
     entry_point='gym_pybullet_drones.envs:CtrlAviary',
