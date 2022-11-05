@@ -56,13 +56,13 @@ import shared_constants
 EPISODE_REWARD_THRESHOLD = -0 # Upperbound: rewards are always negative, but non-zero
 """float: Reward threshold to halt the script."""
 
-DEFAULT_ENV = 'hover'
+DEFAULT_ENV = 'flythrugate'
 DEFAULT_ALGO = 'ppo'
 DEFAULT_OBS = ObservationType('kin')
-DEFAULT_ACT = ActionType('one_d_rpm')
-DEFAULT_CPU = 1
-DEFAULT_STEPS = 3500
-DEFAULT_OUTPUT_FOLDER = 'results'
+DEFAULT_ACT = ActionType('rpm')
+DEFAULT_CPU = 4
+DEFAULT_STEPS = 35000
+DEFAULT_OUTPUT_FOLDER = 'results-gate-test'
 
 def run(
     env=DEFAULT_ENV,
