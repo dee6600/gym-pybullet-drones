@@ -10,7 +10,9 @@ class HoverAviary(BaseSingleAgentAviary):
     
     def __init__(self,
                  drone_model: DroneModel=DroneModel.CF2X,
-                 initial_xyzs=None,
+                 #initial xyz-position of the drone. number of drone = 1 , x = 0 , y = 0 , z = 1
+                 initial_xyzs: np.ndarray=np.array([[0, 0, 1]]),
+                 #initial_xyzs=None,
                  initial_rpys=None,
                  physics: Physics=Physics.PYB,
                  freq: int=240,
@@ -72,7 +74,13 @@ class HoverAviary(BaseSingleAgentAviary):
 
         """
         state = self._getDroneStateVector(0)
-        return -1 * np.linalg.norm(np.array([0, 0, 1])-state[0:3])**2
+        # return -1 * np.linalg.norm(np.array([0, 0, 1])-state[0:3])**2
+        if state == np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]):
+            return 100
+        else:
+            #return -1 * np.linalg.norm(np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])-state)**2
+            return -1 * np.linalg.norm(np.array([0,0,1,0,0,0,0,0,0,0,0,0,0])-state[0:13])**2
+
 
     ################################################################################
     
